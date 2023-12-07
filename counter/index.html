@@ -34,7 +34,7 @@
       }
       function MyApp() {
         const [counter, setCount] = React.useState(0);
-        function handlerClick() {
+        function handlerPlus() {
             setCount(counter + 1);
         }
         function handlerMinus() {
@@ -46,7 +46,7 @@
         return (
             <div>
                 <p>You clicked {counter} times</p>
-                <MyButton text={'+'} onClick={handlerClick} counter={counter}/>
+                <MyButton text={'+'} onClick={handlerPlus} counter={counter}/>
                 <MyCounter counter={counter}/>
                 <MyButton text={'-'} onClick={handlerMinus} counter={counter}/>
                 <MyButton text={'Reset!'} onClick={handlerReset} counter={counter}/>
