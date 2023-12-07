@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Hello World</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+
+    <!-- Don't use this in production: -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+        function MyButton({text, onClick, counter}) {
+
+         const disabled = (text !== 'Reset!') ? ((counter > 9 || counter < 0) ? true : false) : ((counter > 9 || counter < 0) ? false : true);
+         
+         const myStyle = (text !== 'Reset!') ? {} : {margin: 20, display: 'block'};
+         return (
+          <button onClick={onClick} disabled={disabled} style={myStyle}>
+            {text}
+          </button>
+        );
+        }
+        function MyCounter({counter}) {
+        if (counter > 9 || counter < 0) {
+          counter = 'done!';
+        }
+
+        return (
+          <span style={{ margin: 20 }}>{counter}</span>
+        )
+      }
+      function MyApp() {
+        const [counter, setCount] = React.useState(0);
+        function handlerClick() {
+            setCount(counter + 1);
+        }
+        function handlerMinus() {
+            setCount(counter - 1);
+        }
+        function handlerReset() {
+            setCount(0);
+        }
+        return (
+            <div>
+                <p>You clicked {counter} times</p>
+                <MyButton text={'+'} onClick={handlerClick} counter={counter}/>
+                <MyCounter counter={counter}/>
+                <MyButton text={'-'} onClick={handlerMinus} counter={counter}/>
+                <MyButton text={'Reset!'} onClick={handlerReset} counter={counter}/>
+            </div>
+        );
+      }
+
+      const container = document.getElementById('root');
+      const root = ReactDOM.createRoot(container);
+      root.render(<MyApp />);
+
+    </script>
+    <!--
+      Note: this page is a great way to try React but it's not suitable for production.
+      It slowly compiles JSX with Babel in the browser and uses a large development build of React.
+
+      Read this page for starting a new React project with JSX:
+      https://react.dev/learn/start-a-new-react-project
+
+      Read this page for adding React with JSX to an existing project:
+      https://react.dev/learn/add-react-to-an-existing-project
+    -->
+  </body>
+</html>
